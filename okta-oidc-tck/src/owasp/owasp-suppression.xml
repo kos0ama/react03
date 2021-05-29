@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+
+    <suppress>
+       <notes><![CDATA[file name: groovy-*.jar - wrong GAV match ]]></notes>
+       <gav regex="true">^org\.codehaus\.groovy:groovy-.*:.*$</gav>
+       <cve>CVE-2016-6497</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        wiremock-standalone contains an old repackaged version of Jetty which contains the
+        following CVEs, wiremock is pinned to this version. This repackaged Jetty is used for test structures ONLY
+        so we can safely ignore them ]]></notes>
+        <cve>CVE-2017-9735</cve>
+        <cve>CVE-2019-10241</cve>
+        <cve>CVE-2019-10247</cve>
+        <cve>CVE-2019-20330</cve>
+        <cve>CVE-2020-10672</cve>
+        <cve>CVE-2020-10673</cve>
+        <cve>CVE-2020-10968</cve>
+        <cve>CVE-2020-10969</cve>
+        <cve>CVE-2020-11111</cve>
+        <cve>CVE-2020-11112</cve>
+        <cve>CVE-2020-11113</cve>
+        <cve>CVE-2020-11619</cve>
+        <cve>CVE-2020-9547</cve>
+        <cve>CVE-2020-14060</cve>
+        <cve>CVE-2020-9548</cve>
+        <cve>CVE-2020-14061</cve>
+        <cve>CVE-2020-14062</cve>
+        <cve>CVE-2020-14195</cve>
+        <cve>CVE-2019-16942</cve>
+        <cve>CVE-2019-16943</cve>
+        <cve>CVE-2020-10969</cve>
+        <cve>CVE-2020-11619</cve>
+        <cve>CVE-2020-10968</cve>
+        <cve>CVE-2019-20330</cve>
+        <cve>CVE-2020-10673</cve>
+        <cve>CVE-2020-11620</cve>
+        <cve>CVE-2020-11113</cve>
+        <cve>CVE-2019-17531</cve>
+        <cve>CVE-2020-11112</cve>
+        <cve>CVE-2020-8840</cve>
+        <cve>CVE-2020-11111</cve>
+        <cve>CVE-2020-10672</cve>
+        <cve>CVE-2020-9546</cve>
+        <cve>CVE-2020-24616</cve>
+        <cve>CVE-2020-27216</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        wrong GAV, this CVE affects a golang project named jsonpatch:
+        https://github.com/evanphx/json-patch
+
+        coordinate: cpe:2.3:a:json-patch_project:json-patch:-:*:*:*:*:*:*:go ]]></notes>
+        <gav regex="true">^com\.flipkart\.zjsonpatch:zjsonpatch:.*$</gav>
+        <cve>CVE-2018-14632</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        file name: wiremock-standalone-2.23.2.jar/META-INF/maven/com.google.guava/guava/pom.xml
+
+        Unbounded memory allocation - Ignore for the context of testing, as HTTP requests are controlled and wiremock
+        starts/stops a server for test usage only.]]></notes>
+        <gav regex="true">^com\.google\.guava:guava:.*$</gav>
+        <cve>CVE-2018-10237</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        file name: wiremock-standalone-2.25.1.jar/META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml
+
+        wiremock-standalone repackages it's dependencies so we cannot update this version of Jackson directly.
+        Multiple deserializes vulns have been reported.  We use this lib to mock OAuth2/OIDC request/response for
+        integration tests so we can ignore these.  NOTE: this dependency is ONLY used for a test scope and will NOT
+        cause downstream dependencies to use this version of Jackson. ]]></notes>
+        <gav regex="true">^com\.fasterxml\.jackson\.core:jackson-databind:.*$</gav>
+        <cve>CVE-2019-16942</cve>
+        <cve>CVE-2019-16943</cve>
+        <cve>CVE-2019-17531</cve>
+    </suppress>
+
+    <suppress>
+        <notes><![CDATA[
+        Wrong GAV, lots of XML libs have a false positive for processing. This project does NOT use processing ]]></notes>
+        <gav regex="true">^com\.sun\.xml\.bind:jaxb-impl:.*$</gav>
+        <cpe>cpe:/a:processing:processing</cpe>
+    </suppress>
+
+</suppressions>
